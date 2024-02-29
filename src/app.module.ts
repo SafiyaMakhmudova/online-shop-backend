@@ -47,7 +47,7 @@ import { Otp } from './otp/model/otp.model';
       isGlobal: true,
     }),
     ServeStaticModule.forRoot({
-      rootPath: resolve(__dirname, 'static'),
+      rootPath: resolve('src', 'static'),
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',

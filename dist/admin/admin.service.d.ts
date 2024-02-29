@@ -5,7 +5,6 @@ import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { LoginAdminDto } from './dto/login-admin.dto';
 import { UpdateAdminYourselfDto } from './dto/update-admin-yourself.dto';
-import { SelectDto } from './dto/select_limit.dto';
 export declare class AdminService {
     private readonly adminRepo;
     private readonly jwtService;
@@ -35,7 +34,7 @@ export declare class AdminService {
         message: string;
         user: Admin;
     }>;
-    limit_admin(selectDto: SelectDto): Promise<Object>;
+    findAllAdmin(limit: number, skip: number): Promise<Object>;
     SearchAdmin({ name, last_name, email }: {
         name: any;
         last_name: any;
@@ -52,7 +51,6 @@ export declare class AdminService {
         };
     }>;
     findByAdmin(id: number): Promise<Admin>;
-    findAllAdmin(): Promise<Admin[]>;
     findByYourself(id: number): Promise<Admin>;
     removeByAdmin(id: number): Promise<{
         removeAdmin: number;

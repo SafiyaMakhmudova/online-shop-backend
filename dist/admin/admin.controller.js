@@ -25,7 +25,6 @@ const admin_guard_1 = require("../guards/admin.guard");
 const cookieGetter_decorator_1 = require("../decorators/cookieGetter.decorator");
 const superAdmin_guard_1 = require("../guards/superAdmin.guard");
 const selfAdmin_guard_1 = require("../guards/selfAdmin.guard");
-const select_limit_dto_1 = require("./dto/select_limit.dto");
 let AdminController = class AdminController {
     constructor(adminService) {
         this.adminService = adminService;
@@ -36,14 +35,11 @@ let AdminController = class AdminController {
     login(loginAdminDto, res) {
         return this.adminService.login(loginAdminDto, res);
     }
-    select_limit_admin(selectDto) {
-        return this.adminService.limit_admin(selectDto);
-    }
     logout(refreshToken, res) {
         return this.adminService.logout(refreshToken, res);
     }
-    findAll() {
-        return this.adminService.findAllAdmin();
+    findAll(limit, skip) {
+        return this.adminService.findAllAdmin(limit, skip);
     }
     findAllFilter(name, last_name, email) {
         return this.adminService.SearchAdmin({ name, last_name, email });
@@ -91,15 +87,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "login", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: 'Find limited admins' }),
-    (0, swagger_1.ApiResponse)({ status: 200, type: [admin_model_1.Admin] }),
-    (0, common_1.Post)('limit/admin'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [select_limit_dto_1.SelectDto]),
-    __metadata("design:returntype", Promise)
-], AdminController.prototype, "select_limit_admin", null);
-__decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Logout Admin' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: admin_model_1.Admin }),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
@@ -116,8 +103,10 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, type: admin_model_1.Admin }),
     (0, common_1.UseGuards)(superAdmin_guard_1.SuperAdminGuard),
     (0, common_1.Get)('all'),
+    __param(0, (0, common_1.Query)('limit')),
+    __param(1, (0, common_1.Query)('skip')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "findAll", null);
 __decorate([

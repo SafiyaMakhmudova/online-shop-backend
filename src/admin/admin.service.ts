@@ -158,8 +158,8 @@ export class AdminService {
     return response;
   }
 
-  async limit_admin(selectDto: SelectDto): Promise<Object> {
-    const admins = await this.adminRepo.findAll();
+  async findAllAdmin( limit:number, skip:number,): Promise<Object> {
+    const admins = await this.adminRepo.findAll({order:[['createdAt', 'DESC']]});
 
     if (admins.length === 0) {
       return {
@@ -169,16 +169,16 @@ export class AdminService {
     }
 
     let limit_admins = [];
-    if (selectDto.sort === 1 || selectDto.sort < 1) {
+    if (skip === 1 || skip < 1) {
       let num = 0;
-      for (let index = num; index < num + selectDto.limit; index++) {
+      for (let index = num; index < num + limit; index++) {
         if (admins[index] === undefined) break;
 
         limit_admins.push(admins[index]);
       }
     } else {
-      let num = (selectDto.sort - 1) * selectDto.limit;
-      for (let index = num; index < num + selectDto.limit; index++) {
+      let num = (skip - 1) *limit;
+      for (let index = num; index < num +limit; index++) {
         if (admins[index] === undefined) break;
 
         limit_admins.push(admins[index]);
@@ -190,10 +190,13 @@ export class AdminService {
         message: 'Admins Not Found',
         status: HttpStatus.NOT_FOUND,
       };
-
+    
+    const total  = admins.length 
+ 
     return {
       status: HttpStatus.OK,
       limit_admins,
+      total,
     };
   }
 
@@ -308,9 +311,6 @@ export class AdminService {
     return admin;
   }
 
-  async findAllAdmin() {
-    return this.adminRepo.findAll({ order: [['createdAt', 'DESC']] });
-  }
 
   async findByYourself(id: number) {
     // const AdminData = await this.jwtService.verify(access_token, {

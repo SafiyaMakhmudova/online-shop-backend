@@ -25,6 +25,7 @@ import { CookieGetter } from '../decorators/cookieGetter.decorator';
 import { SuperAdminGuard } from '../guards/superAdmin.guard';
 import { selfAdminGuard } from '../guards/selfAdmin.guard';
 import { SelectDto } from './dto/select_limit.dto';
+import { skip } from 'node:test';
 
 @ApiTags('Admin')
 @Controller('admin')
@@ -53,15 +54,6 @@ export class AdminController {
     return this.adminService.login(loginAdminDto, res);
   }
 
-  @ApiOperation({summary: 'Find limited admins'})
-  @ApiResponse({status: 200, type: [Admin]})
-  @Post('limit/admin')
-  select_limit_admin(
-    @Body() selectDto: SelectDto
-  ): Promise<Object> {
-    return this.adminService.limit_admin(selectDto);
-  }
-
   @ApiOperation({ summary: 'Logout Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
@@ -78,9 +70,14 @@ export class AdminController {
   @ApiResponse({ status: 200, type: Admin })
   @UseGuards(SuperAdminGuard)
   @Get('all')
-  findAll() {
-    return this.adminService.findAllAdmin();
+  findAll(
+    @Query('limit') limit:number,
+    @Query('skip') skip:number,
+  ) {
+    return this.adminService.findAllAdmin(limit, skip );
   }
+
+
 
   @ApiOperation({ summary: 'Search Admin' })
   @ApiResponse({ status: 200, type: Admin })
@@ -108,9 +105,6 @@ export class AdminController {
     return this.adminService.refreshToken(+id, refreshToken, res);
   }
 
- 
-
-
   @ApiOperation({ summary: 'Update by id yourself' })
   @ApiResponse({ status: 201, type: Admin })
   @HttpCode(HttpStatus.OK)
@@ -129,7 +123,6 @@ export class AdminController {
     return this.adminService.updateByAdmin(+id, updateAdminDto);
   }
 
-
   @ApiOperation({ summary: 'Get by id yourself' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)
@@ -139,7 +132,6 @@ export class AdminController {
     return this.adminService.findByYourself(+id);
   }
 
- 
   @ApiOperation({ summary: 'find One by Admin' })
   @ApiResponse({ status: 200, type: Admin })
   @HttpCode(HttpStatus.OK)

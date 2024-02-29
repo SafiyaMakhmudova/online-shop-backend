@@ -15,7 +15,8 @@ let FilesService = class FilesService {
     async createFile(file) {
         try {
             const fileName = uuid.v4() + '.jpg';
-            const filePath = path.resolve(__dirname, '..', 'static');
+            console.log("rasm", __dirname);
+            const filePath = path.resolve('src', 'static');
             if (!fs.existsSync(filePath)) {
                 fs.mkdirSync(filePath, { recursive: true });
             }
@@ -27,7 +28,7 @@ let FilesService = class FilesService {
         }
     }
     async removeFile(photoUrl) {
-        fs.unlinkSync(process.cwd() + '/dist/static/' + photoUrl);
+        fs.unlinkSync(process.cwd() + '/src/static/' + photoUrl);
         return true;
     }
 };

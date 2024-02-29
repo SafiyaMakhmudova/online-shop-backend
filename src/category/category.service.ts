@@ -78,6 +78,7 @@ export class CategoryService {
   }
 
   async deleteById(id: number): Promise<number> {
+    await this.removeFile(id)
     const category = await this.categoryRepository.destroy({ where: { id } });
     return category;
   }

@@ -10,7 +10,9 @@ export class FilesService {
   async createFile(file: any): Promise<string> {
     try {
       const fileName = uuid.v4() + '.jpg';
-      const filePath = path.resolve(__dirname, '..', 'static');
+      console.log("rasm", __dirname);
+      
+      const filePath = path.resolve('src', 'static');
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(filePath, { recursive: true });
       }
@@ -25,7 +27,7 @@ export class FilesService {
   }
 
   async removeFile(photoUrl: string) {
-    fs.unlinkSync(process.cwd() + '/dist/static/' + photoUrl);
+    fs.unlinkSync(process.cwd() + '/src/static/' + photoUrl);
     return true;
   }
 }

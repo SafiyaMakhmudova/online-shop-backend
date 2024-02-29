@@ -59,7 +59,7 @@ exports.AppModule = AppModule = __decorate([
                 isGlobal: true,
             }),
             serve_static_1.ServeStaticModule.forRoot({
-                rootPath: (0, path_1.resolve)(__dirname, 'static'),
+                rootPath: (0, path_1.resolve)('src', 'static'),
             }),
             sequelize_1.SequelizeModule.forRoot({
                 dialect: 'postgres',

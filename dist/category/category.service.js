@@ -74,6 +74,7 @@ let CategoryService = class CategoryService {
         return category;
     }
     async deleteById(id) {
+        await this.removeFile(id);
         const category = await this.categoryRepository.destroy({ where: { id } });
         return category;
     }
