@@ -1,4 +1,3 @@
-import { UserRoles } from './roles/models/user-roles.model';
 import { CuponCode } from './cupon_code/models/cupon_code.model';
 import { CuponCodeModule } from './cupon_code/cupon_code.module';
 import { Module } from '@nestjs/common';
@@ -30,9 +29,6 @@ import { discountProduct } from './discount_product/models/discountProduct.model
 import { discountProductModule } from './discount_product/discountProduct.module';
 import { OrderModule } from './order/order.module';
 import { Order } from './order/models/order.model';
-import { Role } from './roles/models/role.model';
-import { AdminRoles } from './roles/models/admin-roles.model';
-import { RolesModule } from './roles/roles.module';
 import { Admin } from './admin/models/admin.model';
 import { UserModule } from './user/user.module';
 import { OtpModule } from './otp/otp.module';
@@ -70,9 +66,6 @@ import { Otp } from './otp/model/otp.model';
         Store,
         discountProduct,
         Order,
-        Role,
-        UserRoles,
-        AdminRoles,
         User,
         Otp,
       ],
@@ -94,7 +87,6 @@ import { Otp } from './otp/model/otp.model';
     AdminModule,
     discountProductModule,
     OrderModule,
-    RolesModule,
     OtpModule,
     SmsModule,
   ],

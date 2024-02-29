@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
-const user_roles_model_1 = require("./roles/models/user-roles.model");
 const cupon_code_model_1 = require("./cupon_code/models/cupon_code.model");
 const cupon_code_module_1 = require("./cupon_code/cupon_code.module");
 const common_1 = require("@nestjs/common");
@@ -39,9 +38,6 @@ const discountProduct_model_1 = require("./discount_product/models/discountProdu
 const discountProduct_module_1 = require("./discount_product/discountProduct.module");
 const order_module_1 = require("./order/order.module");
 const order_model_1 = require("./order/models/order.model");
-const role_model_1 = require("./roles/models/role.model");
-const admin_roles_model_1 = require("./roles/models/admin-roles.model");
-const roles_module_1 = require("./roles/roles.module");
 const admin_model_1 = require("./admin/models/admin.model");
 const user_module_1 = require("./user/user.module");
 const otp_module_1 = require("./otp/otp.module");
@@ -82,9 +78,6 @@ exports.AppModule = AppModule = __decorate([
                     store_model_1.Store,
                     discountProduct_model_1.discountProduct,
                     order_model_1.Order,
-                    role_model_1.Role,
-                    user_roles_model_1.UserRoles,
-                    admin_roles_model_1.AdminRoles,
                     user_model_1.User,
                     otp_model_1.Otp,
                 ],
@@ -106,7 +99,6 @@ exports.AppModule = AppModule = __decorate([
             admin_module_1.AdminModule,
             discountProduct_module_1.discountProductModule,
             order_module_1.OrderModule,
-            roles_module_1.RolesModule,
             otp_module_1.OtpModule,
             sms_module_1.SmsModule,
         ],
